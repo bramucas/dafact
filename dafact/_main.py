@@ -1,0 +1,3 @@
+
+class Dafacter:
+    pass
