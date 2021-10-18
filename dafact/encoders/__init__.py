@@ -1,1 +1,1 @@
-from ._encoders import CsvEncoder, NumpyLikeEncoder
+from ._encoders import CsvEncoder, NumpyLikeEncoder, Encoder
