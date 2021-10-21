@@ -5,6 +5,15 @@ from numpy import asarray, isscalar, array, genfromtxt
 
 class Encoder:
     def __init__(self, data, feature_names=None):
+        """WARNING: this class is not intended to be instanciated. Use a child class instead.
+
+        Args:
+            data ([np.ndarray]): should be 2-dimensional.
+            feature_names ([Iterable[str]], optional): name of the columns. If None, default names (f1, f2, etc.) will be given: Defaults to None.
+
+        Raises:
+            ValueError: if feature_names length does not match the shape of data.
+        """
         if feature_names is None:
             feature_names = [f'f{i}' for i in range(1, data.shape[1] + 1)]
         elif len(feature_names) != data.shape[1]:
@@ -40,6 +49,19 @@ class Encoder:
                         instance_func='instance',
                         feature_func='feature',
                         value_func='value'):
+        """Returns the data as clingo Function objects. Includes one function identifying
+        each instance, one function identifying each feature name,  and one function for 
+        each instance's value.
+
+        Args:
+            feature_names ([Iterable[str]], optional): feature names to be used. If None, the feature names specified when creating the object will be used. Defaults to None.
+            instance_func (str, optional): name for the function used for identifying each instance. Defaults to 'instance'.
+            feature_func (str, optional): name for the function used for identifying each feature. Defaults to 'feature'.
+            value_func (str, optional): name for the function used for encoding each value. Defaults to 'value'.
+
+        Returns:
+            [Iterable[clingo.Function]]: an iterable over clingo Function objects representing the data.
+        """
         feature_names = self._get_feature_names(feature_names)
 
         # Check cache
@@ -77,6 +99,19 @@ class Encoder:
                           instance_func='instance',
                           feature_func='feature',
                           value_func='value'):
+        """Returns the data as a ASP program in a string. Includes one function identifying
+        each instance, one function identifying each feature name,  and one function for 
+        each instance's value.
+
+        Args:
+            feature_names ([Iterable[str]], optional): feature names to be used. If None, the feature names specified when creating the object will be used. Defaults to None.
+            instance_func (str, optional): name for the function used for identifying each instance. Defaults to 'instance'.
+            feature_func (str, optional): name for the function used for identifying each feature. Defaults to 'feature'.
+            value_func (str, optional): name for the function used for encoding each value. Defaults to 'value'.
+
+        Returns:
+            [str]: a string containig the data encoded as an ASP program.
+        """
         def fact_lines(feature_names, clingo_facts):
             len_features = len(feature_names)
             len_rows = len_features + 1
@@ -105,6 +140,15 @@ class CsvEncoder(Encoder):
                  have_names=False,
                  omit_names=False,
                  delimiter=','):
+        """Encodes a csv file as a set of ASP facts. If no feature_names are provided (neither manually or from the csv file), they will be automatically created as 'f1', 'f2', etc.
+
+        Args:
+            csv_path ([str]): path to the csv file.
+            feature_names (Iterable[str], optional): Names of the features/columns. Will overwrite the names retrieved from the file in such a case. Defaults to None.
+            have_names (bool, optional): Must be true if the csv file contains the name of the columns in the first line. Defaults to False.
+            omit_names (bool, optional): Set to True if user wants to ignore the column names from the file. Defaults to False.
+            delimiter (str, optional): Csv delimiter used in the csv file. Defaults to ','.
+        """
         if have_names == False:  # csv do not have headers
             data = genfromtxt(csv_path, delimiter=delimiter)
         else:
@@ -119,6 +163,12 @@ class CsvEncoder(Encoder):
 
 class NumpyLikeEncoder(Encoder):
     def __init__(self, data, feature_names=None):
+        """Encodes a (2D matrix) numpy array-like variable as a set of ASP Facts. Any type which accepts np.asarray(var) should work. If no feature_names are provided, they will be automatically created as 'f1', 'f2', etc.
+
+        Args:
+            data (2d matrix): data to be encoded.
+            feature_names (Iterable[str], optional): Names for the features/columns. Defaults to None.
+        """
         if feature_names is None and hasattr(data, 'columns'):
             feature_names = data.columns
         super().__init__(data, feature_names)
