@@ -140,7 +140,7 @@ class CsvEncoder(Encoder):
                  have_names=False,
                  omit_names=False,
                  delimiter=','):
-        """Encodes a csv file as a set of ASP facts. If no feature_names are provided (neither manually or from the csv file), they will be automatically created as 'f1', 'f2', etc.
+        """Encodes a csv file as a set of ASP facts. If no feature_names are provided (neither manually or from the csv file), they will be automatically created as 'f1', 'f2', etc. Behaviour is not controlled when 'have_names' setted accordingly.
 
         Args:
             csv_path ([str]): path to the csv file.
