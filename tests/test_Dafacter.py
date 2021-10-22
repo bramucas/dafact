@@ -53,3 +53,7 @@ class TestDafacter:
     def test_constructor_numpylike(self, custom_data, expected_facts):
         dafacter = Dafacter(custom_data)
         assert dafacter.as_clingo_facts() == expected_facts
+
+    def test_constructor_numpylike(self, custom_data, expected_facts):
+        dafacter = Dafacter(custom_data)
+        assert dafacter.as_clingo_facts() == expected_facts
