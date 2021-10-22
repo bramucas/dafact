@@ -1,5 +1,6 @@
 from dafact.encoders import Encoder, NumpyLikeEncoder, CsvEncoder
 from os import PathLike
+from argparse import FileType
 
 
 class Dafacter:
@@ -25,8 +26,7 @@ class Dafacter:
             omit_names (bool, optional): Set to True if user wants to ignore the column names from the file. Defaults to False.
             delimiter (str, optional): Csv delimiter used in the csv file. Defaults to ','.
         """
-        if not hasattr(data, 'shape') and (isinstance(data, str)
-                                           or isinstance(data, PathLike)):
+        if not hasattr(data, 'shape') and (isinstance(data, (str, PathLike))):
             self._encoder = CsvEncoder(data,
                                        feature_names=feature_names,
                                        factor=factor,

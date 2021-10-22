@@ -26,8 +26,7 @@ setuptools.setup(
     install_requires=[
         'clingo>=5.5.0.post3',
         'numpy',
+        'argparse',
     ],
     packages=['dafact', 'dafact.encoders'],
-    entry_points={
-        #'console_scripts': ['xclingo=xclingo.__main__:main']
-    })
+    entry_points={'console_scripts': ['dafact=dafact.__main__:main']})
