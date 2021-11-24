@@ -124,7 +124,7 @@ class Encoder:
 
     def as_program_string(self,
                           feature_names=None,
-                          factor=0,
+                          factor=None,
                           instance_func='instance',
                           feature_func='feature',
                           value_func='value'):
