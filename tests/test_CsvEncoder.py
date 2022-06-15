@@ -29,7 +29,7 @@ class TestCsvEncoder:
                             feature_names=expected_manual_features)
         assert csvenc.feature_names == expected_manual_features
 
-        expected_features = ["f1", "f2", "f3", "f4"]
+        expected_features = ["f0", "f1", "f2", "f3"]
         csvenc = CsvEncoder(
             (datadir / "haberman_mini.csv"),
             have_names=True,
@@ -47,7 +47,7 @@ class TestCsvEncoder:
                             feature_names=expected_manual_features)
         assert csvenc.feature_names == expected_manual_features
 
-        expected_features = ["f1", "f2", "f3", "f4"]
+        expected_features = ["f0", "f1", "f2", "f3"]
         csvenc = CsvEncoder((datadir / "haberman_mini_noheaders.csv"),
                             have_names=False,
                             feature_names=None)

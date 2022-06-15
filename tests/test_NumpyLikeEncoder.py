@@ -15,17 +15,17 @@ class TestNumpyLikeEncoder:
     @pytest.fixture(scope='class')
     def expected_facts(self):
         return [
+            Function('feature',  [String('f0')], True),
             Function('feature',  [String('f1')], True),
             Function('feature',  [String('f2')], True),
-            Function('feature',  [String('f3')], True),
             Function('instance', [Number(0)], True),
-            Function('value', [Number(0), String('f1'), Number(1)], True),
-            Function('value', [Number(0), String('f2'), Number(2)], True),
-            Function('value', [Number(0), String('f3'), Number(3)], True),
+            Function('value', [Number(0), String('f0'), Number(1)], True),
+            Function('value', [Number(0), String('f1'), Number(2)], True),
+            Function('value', [Number(0), String('f2'), Number(3)], True),
             Function('instance', [Number(1)], True),
-            Function('value', [Number(1), String('f1'), Number(4)], True),
-            Function('value', [Number(1), String('f2'), Number(5)], True),
-            Function('value', [Number(1), String('f3'), Number(6)], True),
+            Function('value', [Number(1), String('f0'), Number(4)], True),
+            Function('value', [Number(1), String('f1'), Number(5)], True),
+            Function('value', [Number(1), String('f2'), Number(6)], True),
         ]
 
     def test_as_clingo_facts(self, custom_data, expected_facts):
