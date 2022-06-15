@@ -21,7 +21,7 @@ class Encoder:
             ValueError: if feature_names length does not match the shape of data.
         """
         if feature_names is None:
-            feature_names = [f'f{i}' for i in range(1, data.shape[1] + 1)]
+            feature_names = [f'f{i}' for i in range(data.shape[1])]
         elif len(feature_names) != data.shape[1]:
             raise ValueError("'feature_names' len does not match data shape.")
 
