@@ -98,8 +98,8 @@ class Encoder:
 
         # Feature facts
         clingo_facts = [
-            Function(feature_func, [String(fname)], True)
-            for fname in feature_names
+            Function(feature_func, [Number(fnum), String(fname)], True)
+            for fnum, fname in enumerate(feature_names)
         ]
         # Instance and Value facts
         n_rows, _ = self.data.shape
@@ -108,11 +108,11 @@ class Encoder:
             clingo_facts.extend([
                 Function(value_func, [
                     Number(i),
-                    String(fname),
+                    Number(fnum),
                     Number(int(round(val * mult))) if numerical else Number(
                         int(val)),
-                ], True) for fname, numerical, val in zip(
-                    feature_names, self._numerical_columns, self.data[i])
+                ], True) for fnum, (fname, numerical, val) in enumerate(zip(
+                    feature_names, self._numerical_columns, self.data[i]))
             ])
 
         # Set cache

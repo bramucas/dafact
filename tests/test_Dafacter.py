@@ -13,29 +13,29 @@ class TestDafacter:
     @pytest.fixture(scope='class')
     def expected_facts(self):
         return [
-            Function('feature', [String('f0')], True),
-            Function('feature', [String('f1')], True),
-            Function('feature', [String('f2')], True),
+            Function('feature', [Number(0), String('f0')], True),
+            Function('feature', [Number(1), String('f1')], True),
+            Function('feature', [Number(2), String('f2')], True),
             Function('instance', [Number(0)], True),
             Function(
                 'value',
-                [Number(0), String('f0'), Number(1)], True),
+                [Number(0), Number(0), Number(1)], True),
             Function(
                 'value',
-                [Number(0), String('f1'), Number(2)], True),
+                [Number(0), Number(1), Number(2)], True),
             Function(
                 'value',
-                [Number(0), String('f2'), Number(3)], True),
+                [Number(0), Number(2), Number(3)], True),
             Function('instance', [Number(1)], True),
             Function(
                 'value',
-                [Number(1), String('f0'), Number(4)], True),
+                [Number(1), Number(0), Number(4)], True),
             Function(
                 'value',
-                [Number(1), String('f1'), Number(5)], True),
+                [Number(1), Number(1), Number(5)], True),
             Function(
                 'value',
-                [Number(1), String('f2'), Number(6)], True),
+                [Number(1), Number(2), Number(6)], True),
         ]
 
     @pytest.fixture(scope='class')
